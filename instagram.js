@@ -37,9 +37,54 @@ const instagram = {
         await instagram.page.evaluate(() => { document.getElementsByClassName('_0mzm-')[1].click(); });
         
         await instagram.page.waitFor(10000);
-        
+        await instagram.page.waitFor('a > span[aria-label="Perfil"]');
+
+    },
+
+    likeTagsProcess: async (tags = []) =>{
+
+        for(tag of tags){
+
+            /* abrir pagina tag */
+            await  instagram.page.goto(TAG_URL(tag),{ waitUntil: 'networkidle2' });
+            await  instagram.page.waitFor(1000);
+
+            let posts = await instagram.page.$$('article > div:nth-child(3) img[decoding="auto"]');
+
+            for(let i = 0; i < 6; i ++){
+                 
+                let post = posts[i];
+
+                /* click no post */
+                await post.click();
+
+                /* esperar o modal */
+                await instagram.page.waitFor('span[id="react-root"][aria-hidden="true"]');
+                await instagram.page.waitFor(1000);
+
+                let isLikable = await instagram.page.$('span[aria-label="Curtir"');
+
+                if(isLikable){
+                    await instagram.page.click('span[aria-label="Curtir"');
+                }
+                
+                await instagram.page.waitFor(1000);
+
+                /* fecha o modal  */
+                let closeModalButton = await instagram.page.$x('//button[contains(text(),"Fechar")]');
+                await closeModalButton[0].click('//button[contains(text(),"Fechar")]');
+
+                await instagram.page.waitFor(1000);
+
+            }
+
+            await instagram.page.waitFor(60000);
+                
+
+        }
 
     }
+
 }
 
 module.exports = instagram;
