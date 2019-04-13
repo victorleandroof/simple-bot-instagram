@@ -1,0 +1,28 @@
+{
+  "name": "bot-instagram",
+  "version": "1.0.0",
+  "description": "project for instagram ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/victorleandroof/simple-bot-instagram.git"
+  },
+  "keywords": [
+    "bot",
+    "instagram"
+  ],
+  "author": "Victor Leandro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victorleandroof/simple-bot-instagram/issues"
+  },
+  "homepage": "https://github.com/victorleandroof/simple-bot-instagram#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "puppeteer": "^1.14.0"
+  }
+}
