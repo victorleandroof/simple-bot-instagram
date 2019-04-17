@@ -14,5 +14,5 @@ async function tarefas(){
 }
 
 schedule.scheduleJob('42 * * * *', function(){
-    await tarefas();
+    tarefas();
 });
