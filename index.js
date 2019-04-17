@@ -1,7 +1,8 @@
 const ig = require('./instagram');
 const user = require('./user');
+const schedule = require('node-schedule');
 
-(async() =>{
+async function tarefas(){
 
     await ig.initialize();
 
@@ -10,4 +11,8 @@ const user = require('./user');
     await ig.likeTagsProcess(['ibm','developer','datascience','java','nerd','geek']);
 
     await ig.close();
-})()
+}
+
+schedule.scheduleJob('42 * * * *', function(){
+    await tarefas();
+});

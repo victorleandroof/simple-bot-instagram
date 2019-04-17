@@ -23,6 +23,7 @@
   "homepage": "https://github.com/victorleandroof/simple-bot-instagram#readme",
   "dependencies": {
     "fs": "0.0.1-security",
+    "node-schedule": "^1.3.2",
     "puppeteer": "^1.14.0"
   }
 }
