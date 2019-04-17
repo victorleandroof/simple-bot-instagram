@@ -83,6 +83,11 @@ const instagram = {
 
         }
 
+    },
+
+    close: async () =>{
+        await instagram.browser.close();
+        instagram.browser = null;
     }
 
 }
