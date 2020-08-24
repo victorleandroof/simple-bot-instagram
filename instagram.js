@@ -17,27 +17,17 @@ const instagram = {
     },
 
     login: async (username,password) =>{
+        await instagram.page.goto(BASE_URI);
         
-        await instagram.page.goto(BASE_URI,{ waitUntil: 'networkidle2' });
+        await instagram.page.waitFor('input[name="username"]');
+        await instagram.page.waitFor('input[name="password"]');
 
-        let loginButton = await instagram.page.$x('//a[contains(text(),"Conecte-se")]');
+        await instagram.page.type('input[name="username"]',username);
+        await instagram.page.type('input[name="password"]',password);
+
+        await instagram.page.evaluate(() => { document.getElementsByClassName('sqdOP  ')[1].click(); });
         
-
-        /* click no botao login */
-        await loginButton[0].click();
-
-        await instagram.page.waitForNavigation({ waitUntil: 'networkidle2' });
-
-        await instagram.page.waitFor(1000);
-
-        /* escrevendo username e o password*/
-        await instagram.page.type('input[name="username"]',username,{delay: 50})
-        await instagram.page.type('input[name="password"]',password,{delay: 50})
-        
-        await instagram.page.evaluate(() => { document.getElementsByClassName('_0mzm-')[1].click(); });
-        
-        await instagram.page.waitFor(10000);
-        await instagram.page.waitFor('a > span[aria-label="Perfil"]');
+        await instagram.page.waitFor('.Fifk5');
 
     },
 
@@ -59,26 +49,21 @@ const instagram = {
                 await post.click();
 
                 /* esperar o modal */
-                await instagram.page.waitFor('span[id="react-root"][aria-hidden="true"]');
-                await instagram.page.waitFor(1000);
+                await instagram.page.waitFor('._97aPb ');
 
-                let isLikable = await instagram.page.$('span[aria-label="Curtir"');
+                let isLikable = await instagram.page.$('svg[aria-label="Curtir"]');
 
                 if(isLikable){
-                    await instagram.page.click('span[aria-label="Curtir"');
+                    await instagram.page.click('svg[aria-label="Curtir"]');
+                    instagram.page.waitFor('svg[aria-label="Descurtir"]')                
                 }
-                
-                await instagram.page.waitFor(1000);
-
+                await instagram.page.waitFor(6000);
                 /* fecha o modal  */
-                let closeModalButton = await instagram.page.$x('//button[contains(text(),"Fechar")]');
-                await closeModalButton[0].click('//button[contains(text(),"Fechar")]');
-
-                await instagram.page.waitFor(1000);
+                await instagram.page.click('svg[aria-label="Fechar"]');
 
             }
 
-            await instagram.page.waitFor(60000);
+            await instagram.page.waitFor(6000);
                 
 
         }
